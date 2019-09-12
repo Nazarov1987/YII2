@@ -11,8 +11,6 @@ class DayController extends Controller
     {
         $activityDay = new Day();
 
-        $activityDay->weekDay = 'Понедельник';
-        $activityDay->haveActivity = 'Других событий нет';
         return $this->render('view', [
             'day'=> $activityDay
         ]);

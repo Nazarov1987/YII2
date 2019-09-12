@@ -19,7 +19,8 @@ class ActivityController extends Controller{
         $activityItem->dayEnd = '09.09.2019';
         $activityItem->userId = 'ID автора';
         $activityItem->description = 'Выполнение домашнего задания';
-        $activityItem->reiteration = 'Еженедельное событие';
+        $activityItem->repeat = false;
+        $activityItem->blocked = true;
         return $this->render('view', [
             'model'=> $activityItem
         ]);
