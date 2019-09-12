@@ -20,8 +20,8 @@
 
 <h2><?= $model->description ?></h2>
 
-<h3><?= $model->reiteration ?></h3>
+<h3><?= $model->repeat ?></h3>
 
-<h3><?= $day->weekDay ?></h3>
+<h3><?= $day->dayOff ?></h3>
 
-<h3><?= $day->haveActivity ?></h3>
+<h3><?= $day->activities ?></h3>
