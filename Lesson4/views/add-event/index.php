@@ -19,12 +19,15 @@ use yii\web\View;
 ]) ?>
 
 <?= $form->field($model, 'title')->textInput() ?>
-<?= $form->field($model, 'dayStart')->textInput() ?>
-<?= $form->field($model, 'dayEnd')->textInput() ?>
+<?= $form->field($model, 'dayStart')->textInput(['type' => 'date']) ?>
+<?= $form->field($model, 'dayEnd')->textInput(['type' => 'date']) ?>
+<?= $form->field($model, 'userId')->textInput(['autocomplete' => 'off']) ?>
 <?= $form->field($model, 'description')->textarea() ?>
 <?= $form->field($model, 'repeat')->checkbox() ?>
 <?= $form->field($model, 'blocked')->checkbox() ?>
 
+<div class="form-group" style="margin-left: 500px;">
 <?= Html::submitButton('Добавить событие', ['class' => 'btn btn-success']) ?>
+</div>
 
 <?php ActiveForm::end() ?>

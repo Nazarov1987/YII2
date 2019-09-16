@@ -20,6 +20,7 @@ class AddEvent extends Model
             'title' => 'Название события',
             'dayStart' => 'Начало события',
             'dayEnd' => 'Окончание события',
+            'userId' => 'Пользователь',
             'description' => 'Описание события',
             'repeat' => 'Повторение события',
             'blocked' => 'Событие на весь день'
@@ -28,8 +29,9 @@ class AddEvent extends Model
     public function rules()
     {
         return [
-            [['title','dayStart', 'dayEnd'], 'required'],
-            [['dayStart', 'dayEnd'], 'date', 'format' => 'd-m-y'],
+            [['title','dayStart', 'dayEnd', 'userId'], 'required'],
+            [['dayStart', 'dayEnd'], 'date', 'format' => 'php:d-m-y'],
+            [['userId'], 'integer'],
             [['title'], 'string', 'min' => 20, 'max' => 200],
         ];
     }
