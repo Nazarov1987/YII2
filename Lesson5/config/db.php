@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2celendar',
+    'dsn' => 'mysql:host=127.0.0.1;port=3307;dbname=nazarov',
     'username' => 'root',
-    'password' => '12345687',
+    'password' => '',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

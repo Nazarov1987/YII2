@@ -18,13 +18,13 @@ use yii\web\View;
     'action' => '/add-event/submit',
 ]) ?>
 
-<?= $form->field($model, 'title')->textInput() ?>
-<?= $form->field($model, 'dayStart')->textInput(['type' => 'date']) ?>
-<?= $form->field($model, 'dayEnd')->textInput(['type' => 'date']) ?>
-<?= $form->field($model, 'userId')->textInput(['autocomplete' => 'off']) ?>
+<?= $form->field($model, 'title_fd')->textInput() ?>
+<?= $form->field($model, 'day_start_fd')->textInput(['type' => 'date']) ?>
+<?= $form->field($model, 'day_end_fd')->textInput(['type' => 'date']) ?>
+<?= $form->field($model, 'user_id_fd')->textInput(['autocomplete' => 'off']) ?>
 <?= $form->field($model, 'description')->textarea() ?>
-<?= $form->field($model, 'repeat')->checkbox() ?>
-<?= $form->field($model, 'blocked')->checkbox() ?>
+<?= $form->field($model, 'repeat_fd')->checkbox() ?>
+<?= $form->field($model, 'blocked_fd')->checkbox() ?>
 
 <div class="form-group" style="margin-left: 500px;">
 <?= Html::submitButton('Добавить событие', ['class' => 'btn btn-success']) ?>

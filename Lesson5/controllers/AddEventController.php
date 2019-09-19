@@ -22,6 +22,7 @@ class AddEventController extends Controller{
         $model -> load(Yii::$app->request->post());
 
         if($model->validate()){
+            $model->save();
             return $this->redirect('/add-event/result');
         }else{
             return 'Возникла ошибка при добавлении события';
