@@ -6,6 +6,6 @@ use yii\base\Model;
 
 class Day extends Model
 {
-    public $weekDay;
-    public $haveActivity;
+    public $dayOff = false;
+    public $activities = [];
 }
