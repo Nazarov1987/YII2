@@ -7,7 +7,6 @@ use yii\db\ActiveRecord;
 /**
  * Модель - Событие
  * @package app\models
- *
  * @property-read User $user
  */
 
@@ -32,9 +31,12 @@ class AddEvent extends ActiveRecord
     public function rules()
     {
         return [
-            [['title_fd','day_start_fd', 'day_end_fd', 'user_id_fd'], 'required'],
+            [['title_fd','day_start_fd', 'user_id_fd'], 'required'],
             [['user_id_fd'], 'integer'],
-            [['day_start_fd', 'day_end_fd'], 'date'],
+           // [['day_start_fd', 'day_end_fd'], 'date'],
+            ['day_end_fd', 'default', 'value' => function () {
+                return $this->day_start_fd;
+            }],
             [['title_fd'], 'string', 'min' => 20, 'max' => 200],
             [['description'], 'string', 'min' => 20, 'max' => 200],
         ];
@@ -43,5 +45,4 @@ class AddEvent extends ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
-}
 }
