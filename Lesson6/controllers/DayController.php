@@ -7,13 +7,11 @@ use yii\web\Controller;
 
 class DayController extends Controller
 {
-    public function actionView()
+    public function actionIndex()
     {
         $activityDay = new Day();
 
-        $activityDay->weekDay = 'Понедельник';
-        $activityDay->haveActivity = 'Других событий нет';
-        return $this->render('view', [
+        return $this->render('index', [
             'day'=> $activityDay
         ]);
     }
