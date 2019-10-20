@@ -7,8 +7,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\forms\LoginForm;
-use app\models\forms\SignupForm;
+use app\models\LoginForm;
 use app\models\ContactForm;
 
 class SiteController extends Controller
@@ -56,7 +55,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Показать главную страницу
+     * Displays homepage.
      *
      * @return string
      */
@@ -66,7 +65,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Страница с формой входа на сайт
+     * Login action.
      *
      * @return Response|string
      */
@@ -88,32 +87,42 @@ class SiteController extends Controller
     }
 
     /**
-     * Страница с формой регистрации
-     *
-     * @return Response|string
-     * @throws \yii\base\Exception
-     */
-    public function actionSignup()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->register()) {
-            return $this->goHome();
-        }
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
-    }
-    /**
-     * Выход из пользовательской сессии
+     * Logout action.
      *
      * @return Response
      */
     public function actionLogout()
     {
         Yii::$app->user->logout();
+
         return $this->goHome();
+    }
+
+    /**
+     * Displays contact page.
+     *
+     * @return Response|string
+     */
+    public function actionContact()
+    {
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        }
+        return $this->render('contact', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionAbout()
+    {
+        return $this->render('about');
     }
 }
