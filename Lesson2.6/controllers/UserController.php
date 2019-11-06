@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * UserController implements the CRUD actions for User model.
  */
@@ -21,6 +21,15 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -66,6 +75,7 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
+        $model->creator_id = 2;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -125,13 +135,12 @@ class UserController extends Controller
             [
         'username' => 'admin',
         'name' => 'First',
+        'password' => '12345687',
         'password_hash' => 'dfjgukihldydtg',
         'access_token' => 'hjkl;',
         'auth_key' => 'asdfg',
         'creator_id' => 1,
         'updater_id' => 1,
-        'created_at' => time(),
-        'updated_at' => time(),
             ]
             );
             $user->save();

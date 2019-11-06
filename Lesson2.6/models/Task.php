@@ -24,6 +24,14 @@ class Task extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+//Подключаем поведение TimestampBehavior
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class
+        ];
+    }
     public static function tableName()
     {
         return 'task';
@@ -35,7 +43,7 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'creator_id', 'created_at'], 'required'],
+            [['title', 'description', 'creator_id'], 'required'],
             [['description'], 'string'],
             [['creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255],
