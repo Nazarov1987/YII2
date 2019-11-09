@@ -75,7 +75,6 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
-        $model->creator_id = 2;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

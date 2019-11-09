@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\TaskUser;
+use app\models\Task;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
- * TaskUserController implements the CRUD actions for TaskUser model.
+ * TaskController implements the CRUD actions for Task model.
  */
-class TaskUserController extends Controller
+class TaskController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -20,6 +20,15 @@ class TaskUserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -30,22 +39,22 @@ class TaskUserController extends Controller
     }
 
     /**
-     * Lists all TaskUser models.
+     * Lists all Task models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionMy()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => TaskUser::find(),
+            'query' => Task::find() -> byCreator(Yii::$app->user->id),
         ]);
 
-        return $this->render('index', [
+        return $this->render('my', [
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single TaskUser model.
+     * Displays a single Task model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +67,17 @@ class TaskUserController extends Controller
     }
 
     /**
-     * Creates a new TaskUser model.
+     * Creates a new Task model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new TaskUser();
+        $model = new Task();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'Создана новая задача');
+            return $this->redirect(['my']);
         }
 
         return $this->render('create', [
@@ -76,7 +86,7 @@ class TaskUserController extends Controller
     }
 
     /**
-     * Updates an existing TaskUser model.
+     * Updates an existing Task model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +106,7 @@ class TaskUserController extends Controller
     }
 
     /**
-     * Deletes an existing TaskUser model.
+     * Deletes an existing Task model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +120,15 @@ class TaskUserController extends Controller
     }
 
     /**
-     * Finds the TaskUser model based on its primary key value.
+     * Finds the Task model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return TaskUser the loaded model
+     * @return Task the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TaskUser::findOne($id)) !== null) {
+        if (($model = Task::findOne($id)) !== null) {
             return $model;
         }
 

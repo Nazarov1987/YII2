@@ -39,8 +39,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Главная', 'url' => ['/site/index']],
-            ['label' => 'Тест', 'url' => ['/test/select']],
-            ['label' => 'Контакты', 'url' => ['/site/contact']],
+            ['label' => 'Список моих задач', 'url' => ['/task/my']],
+            ['label' => 'Создать задачу', 'url' => ['/task/create']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/site/login']]
             ) : (

@@ -31,7 +31,7 @@ class TaskUser extends \yii\db\ActiveRecord
     {
         return [
             [['task_id', 'user_id'], 'required'],
-            [['task_id', 'user_id'], 'integer'],
+            [['task_id'], 'integer'],
             [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Task::className(), 'targetAttribute' => ['task_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
