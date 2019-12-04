@@ -2,6 +2,12 @@
 
 use Faker\Provider\DateTime;
 use yii\helpers\Html;
+use common\models\User;
+use mohorev\file\UploadImageBehavior;
+
+/**
+* @mixin UploadImageBehavior
+*/
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -35,11 +41,9 @@ use yii\helpers\Html;
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                                 alt="User Image"/>
+                                        <?= Html::img(Yii::$app->user->identity->getThumbUploadUrl('avatar', User::AVATAR_ICO)) ?>
                                         </div>
                                         <h4>
-                                            
                                             <small><i class="fa fa-clock-o"></i> <?= date('D, d M Y H:i:s') ?></small>
                                         </h4>
                                         <p></p>
@@ -55,15 +59,13 @@ use yii\helpers\Html;
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                        <?= Html::img(Yii::$app->user->identity->getThumbUploadUrl('avatar', User::AVATAR_ICO)) ?>
                         <span class="hidden-xs"> <?= Yii::$app->getUser()->identity->username ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                 alt="User Image"/>
-
+                        <?= Html::img(Yii::$app->user->identity->getThumbUploadUrl('avatar', User::AVATAR_PREVIEW)) ?>
                             <p>
                                 <?= Yii::$app->getUser()->identity->username ?> <br>
                                 <?= Yii::$app->getUser()->identity->email ?>
